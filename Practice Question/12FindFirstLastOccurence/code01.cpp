@@ -47,12 +47,11 @@ void firstAndLast(int arr[], int key, int n)
     mid = start + (end - start) / 2;
   }
   cout << last<<endl;
-  cout<<" the total number of occurence : "<<(last-first)<<endl;
 }
 
 int main()
 {
-  int even[] = {1, 2, 2, 2, 3, 3, 3, 8}; // if input is 2 : -output must be 1 - 6
+  int even[] = {1, 2, 2, 2, 2, 2, 2, 8}; // output must be 1 - 6
   int odd[] = {1, 2, 2, 2, 2, 2, 2};     // output must be 1 - 6
   int key;
   cout << "Enter the number : ";
