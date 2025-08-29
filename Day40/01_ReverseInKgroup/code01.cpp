@@ -19,20 +19,47 @@ public:
     {
       delete next;
       this->next = NULL;
-      cout << "Memory Free " << value << endl;
+      cout << "Memory Free with value : " << value << endl;
     }
   }
 };
 
+// REVERSE IN K GROUP
 
-
+Link *reverseInKgroup(Link *&head, int k)
+{
+  // Base Call
+  if (head == NULL)
+  {
+    return NULL;
+  }
+  // step1: reverse first k nodes
+  Link *next = NULL;
+  Link *curr = head;
+  Link *prev = NULL;
+  int cnt = 0;
+  while (curr != NULL && cnt < k)
+  {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+    cnt++;
+  }
+  // step 2:recursion dekh lega aage ka;
+  if (next != NULL)
+  {
+    head->next = reverseInKgroup(next, k);
+  }
+  // step 3:return head of reverse list
+  return prev;
+}
 void insertAtTail(Link *&tail, int data)
 {
   Link *l2 = new Link(data);
   tail->next = l2;
   tail = tail->next;
 }
-
 void InsertAtHead(Link *&head, int data)
 {
 
@@ -42,7 +69,6 @@ void InsertAtHead(Link *&head, int data)
   node2->next = head; // n2->Node mai maine second wale ka head de diya
   head = node2;
 }
-
 void insertAtPosition(Link *&head, Link *&tail, int Position, int d)
 {
   // insert at start
@@ -80,69 +106,20 @@ void print(Link *&head)
   cout << endl;
 }
 
-void deleteNode(int position, Link *&head, Link *&tail)
-{
-  Link *curr = head;
-  Link *prev = NULL;
-  int cnt = 1;
-  if (position == 1)
-  {
-    Link *temp = head;
-    head = head->next;
-    temp->next = NULL;
-    delete temp;
-    return;
-  }
-  else
-  {
-    while (cnt < position)
-    {
-      prev = curr;
-      curr = curr->next;
-      cnt++;
-    }
-    prev->next = curr->next;
-    if (cnt == position)
-    {
-      tail = prev;
-    }
-    curr->next = NULL;
-    delete curr;
-  }
-}
-
 int main()
 {
   Link *l1 = new Link(10);
   Link *head = l1;
   Link *tail = l1;
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
   insertAtTail(tail, 20);
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
   insertAtTail(tail, 40);
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
   insertAtTail(tail, 50);
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
-
   insertAtPosition(head, tail, 3, 30);
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
-
-  deleteNode(5, head, tail);
-
+  insertAtTail(tail, 60);
   print(head);
-  cout << endl;
-  cout << "HEAD : " << head->data << endl;
-  cout << "TAIL : " << tail->data << endl;
-
+  Link *curr = head;
+  Link *prev = NULL;
+  Link *ans = reverseInKgroup(head, 2);
+  print(ans);
   return 0;
 }
