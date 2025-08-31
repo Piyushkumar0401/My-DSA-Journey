@@ -53,9 +53,9 @@ Link *merge2Sort(Link *&head1, Link *&head2)
   Link *next1 = curr1->next;
   Link *curr2 = head2;
   Link *forward = curr2->next;
-  while (next1 != NULL || curr2 != NULL)
+  while (next1 != NULL && curr2 != NULL)
   {
-    if ((curr2->data >= curr1->data) && (curr2->data <= next1->data))
+    if ((curr2->data >= curr1->data) && (curr2->data < next1->data))
     {
       curr1->next = curr2;
       forward = curr2->next;
@@ -71,6 +71,7 @@ Link *merge2Sort(Link *&head1, Link *&head2)
       if (next1 == NULL)
       {
         curr1->next = curr2;
+        return head1;
       }
     }
   }
@@ -107,7 +108,7 @@ int main()
   Link *head1 = l1;
   Link *tail1 = l1;
   insertAtTail(tail1, 3);
-  insertAtTail(tail1, 5);
+  insertAtTail(tail1, 6);
   Link *l2 = new Link(2);
   Link *head2 = l2;
   Link *tail2 = l2;
