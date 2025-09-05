@@ -1,1 +1,4 @@
 https://leetcode.com/problems/largest-rectangle-in-histogram/description/
+
+
+https://www.geeksforgeeks.org/dsa/largest-rectangular-area-in-a-histogram-using-stack/
